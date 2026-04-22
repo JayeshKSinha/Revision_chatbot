@@ -1,0 +1,2 @@
+SUPPORTED_FILE_TYPES = [".pdf"]
+DEFAULT_REVISION_MODE = "revision_notes"

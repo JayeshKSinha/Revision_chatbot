@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ResearchInsight | Academic Assistant</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dee8ff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-container": "#fcfcff",
+                        "surface-tint": "#005bc1",
+                        "on-primary-fixed-variant": "#004493",
+                        "on-secondary-container": "#626567",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#cfdaf2",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#444749",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-surface-variant": "#414755",
+                        "secondary-fixed-dim": "#c4c7c9",
+                        "on-primary-fixed": "#001a41",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c1c6d7",
+                        "surface-container-low": "#f0f3ff",
+                        "outline": "#717786",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "on-primary-container": "#fefcff",
+                        "secondary-fixed": "#e0e3e5",
+                        "secondary": "#5c5f61",
+                        "secondary-container": "#e0e3e5",
+                        "inverse-primary": "#adc6ff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "on-background": "#111c2d",
+                        "surface-bright": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "inverse-surface": "#263143",
+                        "surface-variant": "#d8e3fb",
+                        "tertiary-container": "#6f757c",
+                        "tertiary": "#565d63",
+                        "primary": "#0058bc",
+                        "inverse-on-surface": "#ecf1ff",
+                        "on-surface": "#111c2d",
+                        "surface-container-highest": "#d8e3fb",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "primary-container": "#0070eb",
+                        "tertiary-fixed": "#dde3eb",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#191c1e",
+                        "surface-container": "#e7eeff",
+                        "surface": "#f9f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "max_width": "1440px",
+                        "sm": "16px",
+                        "base": "4px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "xl": "64px",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Manrope"],
+                        "display-lg": ["Newsreader"],
+                        "title-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Newsreader"],
+                        "label-caps": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "title-sm": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .loader {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #0058bc;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-xl border-b border-black/5 top-0 z-50 sticky shadow-sm">
+        <div class="flex justify-between items-center px-8 h-16 w-full max-w-[1440px] mx-auto">
+            <div class="text-2xl font-semibold tracking-tight text-blue-600 font-newsreader antialiased">ResearchInsight</div>
+            <nav class="hidden md:flex items-center gap-x-8 h-full">
+                <a class="text-blue-600 border-b-2 border-blue-600 pb-1 font-medium transition-colors" href="#ask-papers">Ask Papers</a>
+                <a class="text-slate-500 hover:text-slate-800 transition-colors" href="#revision-notes">Revision Notes</a>
+                <a class="text-slate-500 hover:text-slate-800 transition-colors" href="#sources">Sources</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <div id="health-status" class="flex items-center gap-2 text-xs text-slate-500">
+                    <span class="w-2 h-2 rounded-full bg-slate-300"></span> Checking...
+                </div>
+                <button class="p-2 text-slate-500 hover:bg-slate-100/50 rounded-md transition-all active:scale-95">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-screen max-w-[1440px] mx-auto relative">
+        <!-- Sidebar -->
+        <aside class="w-64 fixed left-0 top-16 bottom-0 bg-white/70 backdrop-blur-2xl border-r border-black/10 flex flex-col p-4 gap-y-6 overflow-y-auto">
+            <div class="flex flex-col gap-1">
+                <h3 class="font-bold text-lg text-slate-800 font-newsreader">Project Workspace</h3>
+                <p class="text-xs text-slate-500 font-body-sm tracking-wide">Deep Work Mode</p>
+            </div>
+            
+            <input type="file" id="file-upload" multiple accept=".pdf" class="hidden">
+            <button onclick="document.getElementById('file-upload').click()" class="w-full py-3 px-4 bg-primary text-white rounded-xl font-title-sm flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-sm">add</span>
+                New Research
+            </button>
+
+            <nav class="flex flex-col gap-1 flex-1">
+                <div class="bg-blue-50/50 text-blue-700 rounded-lg font-semibold flex items-center gap-3 px-3 py-2 cursor-pointer transition-transform">
+                    <span class="material-symbols-outlined">book_5</span>
+                    <span class="text-sm">Library</span>
+                </div>
+                <div class="text-slate-600 hover:bg-slate-100 rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-transform">
+                    <span class="material-symbols-outlined">upload_file</span>
+                    <span class="text-sm">Uploads</span>
+                </div>
+            </nav>
+
+            <div class="mt-auto border-t border-black/5 pt-4 space-y-4">
+                <div class="p-3 bg-surface-container-low rounded-xl border border-black/5">
+                    <h4 class="text-xs font-label-caps text-slate-500 mb-2">SYSTEM STATUS</h4>
+                    <div id="index-status" class="flex items-center gap-2 text-xs text-on-surface">
+                        <span class="w-2 h-2 rounded-full bg-slate-300"></span> No index loaded
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 ml-64 p-8">
+            <div class="max-w-[1000px] mx-auto space-y-10">
+                <!-- Section: Ask Papers -->
+                <section class="space-y-6" id="ask-papers">
+                    <div class="flex flex-col gap-2">
+                        <h1 class="text-headline-md font-headline-md text-on-surface">Ask Your Papers</h1>
+                        <p class="text-body-md text-slate-500">Query your uploaded corpus with high-precision citations.</p>
+                    </div>
+
+                    <!-- Chat Interface -->
+                    <div class="space-y-6">
+                        <div id="chat-history" class="space-y-6">
+                            <!-- Messages will appear here -->
+                            <div class="glass-card rounded-xl p-4 bg-slate-50 border-slate-100 text-slate-500 italic text-sm">
+                                Upload PDFs to start researching...
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <textarea id="query-input" class="w-full glass-card rounded-2xl p-4 pr-16 border border-slate-200 focus:border-primary focus:ring-0 resize-none h-24 transition-all shadow-sm outline-none" placeholder="Ask a question about your research..."></textarea>
+                            <button id="send-query" class="absolute bottom-4 right-4 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-md active:scale-90 transition-transform">
+                                <span class="material-symbols-outlined">arrow_upward</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-slate-200"/>
+
+                <!-- Section: Revision Notes -->
+                <section class="space-y-6" id="revision-notes">
+                    <div class="flex flex-col gap-2">
+                        <h2 class="text-headline-md font-headline-md text-on-surface">Revision Notes</h2>
+                        <p class="text-body-md text-slate-500">Transform research into study material.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="col-span-1 space-y-4">
+                            <div class="space-y-2">
+                                <label class="text-xs font-label-caps text-slate-500">TOPIC INPUT</label>
+                                <input id="revision-topic" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm focus:border-primary outline-none" placeholder="e.g. Coastal Carbon Sink" type="text"/>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-label-caps text-slate-500">EXPLANATION STYLE</label>
+                                <select id="revision-style" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm focus:border-primary outline-none">
+                                    <option value="Concise Summary">Concise Summary</option>
+                                    <option value="Beginner Friendly">Beginner Friendly</option>
+                                    <option value="Exam Prep (Q&A)">Exam Prep (Q&amp;A)</option>
+                                    <option value="Methodology Deep-Dive">Methodology Deep-Dive</option>
+                                </select>
+                            </div>
+                            <button id="generate-notes" class="w-full bg-surface-container-high text-primary font-semibold py-3 rounded-xl border border-primary/10 hover:bg-primary-fixed-dim transition-colors">
+                                Generate Notes
+                            </button>
+                        </div>
+                        
+                        <div id="revision-output" class="col-span-2 glass-card rounded-2xl p-8 border border-slate-200 min-h-[300px]">
+                            <div class="prose prose-slate max-w-none text-slate-400 italic">
+                                Your revision notes will appear here...
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="border-slate-200"/>
+
+                <!-- Section: Sources -->
+                <section class="space-y-6 pb-20" id="sources">
+                    <div class="flex justify-between items-end">
+                        <div class="flex flex-col gap-2">
+                            <h2 class="text-headline-md font-headline-md text-on-surface">Active Sources</h2>
+                            <p class="text-body-md text-slate-500">Metadata and context for current session.</p>
+                        </div>
+                    </div>
+                    <div id="source-list" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <!-- Source items will appear here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let currentIndexName = '';
+        let uploadedFiles = [];
+
+        // Check Health
+        async function checkHealth() {
+            try {
+                const res = await fetch('/api/health');
+                const data = await res.json();
+                const healthEl = document.getElementById('health-status');
+                if (data.status === 'ok') {
+                    healthEl.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Backend Online';
+                } else {
+                    healthEl.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span> Backend Error';
+                }
+            } catch (e) {
+                document.getElementById('health-status').innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span> Backend Offline';
+            }
+        }
+        setInterval(checkHealth, 5000);
+        checkHealth();
+
+        // Handle File Upload
+        document.getElementById('file-upload').addEventListener('change', async (e) => {
+            const files = e.target.files;
+            if (!files.length) return;
+
+            const formData = new FormData();
+            for (let file of files) {
+                formData.append('files', file);
+            }
+
+            const uploadBtn = document.querySelector('button[onclick*="file-upload"]');
+            const originalBtnText = uploadBtn.innerHTML;
+            uploadBtn.innerHTML = '<div class="loader mr-2"></div> Indexing...';
+            uploadBtn.disabled = true;
+
+            try {
+                const res = await fetch('/api/upload-pdfs', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                
+                if (data.success) {
+                    currentIndexName = data.index_name;
+                    uploadedFiles = data.uploaded_files;
+                    updateUIForUpload();
+                } else {
+                    alert('Upload failed: ' + (data.error || 'Unknown error'));
+                }
+            } catch (err) {
+                alert('Upload error: ' + err.message);
+            } finally {
+                uploadBtn.innerHTML = originalBtnText;
+                uploadBtn.disabled = false;
+                e.target.value = ''; // Reset file input
+            }
+        });
+
+        function updateUIForUpload() {
+            document.getElementById('index-status').innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Index Ready`;
+            
+            const sourceList = document.getElementById('source-list');
+            sourceList.innerHTML = uploadedFiles.map(file => `
+                <div class="md:col-span-2 glass-card p-4 rounded-xl flex flex-col gap-3 group relative overflow-hidden">
+                    <div class="flex items-start justify-between">
+                        <div class="bg-blue-100 text-blue-600 p-2 rounded-lg">
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                        </div>
+                        <span class="text-[10px] font-label-caps text-emerald-600 px-2 py-0.5 bg-emerald-50 rounded">INDEXED</span>
+                    </div>
+                    <div>
+                        <h4 class="font-title-sm text-base truncate">${file}</h4>
+                        <p class="text-[11px] text-slate-400 mt-1 uppercase tracking-widest">Active Source</p>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('chat-history').innerHTML = `
+                <div class="glass-card rounded-xl p-4 bg-emerald-50/50 border-emerald-100 text-emerald-700 text-sm">
+                    Success! Indexed ${uploadedFiles.length} papers. You can now ask questions.
+                </div>
+            `;
+        }
+
+        // Handle Query
+        document.getElementById('send-query').addEventListener('click', async () => {
+            const input = document.getElementById('query-input');
+            const query = input.value.trim();
+            if (!query) return;
+            if (!currentIndexName) {
+                alert('Please upload papers first!');
+                return;
+            }
+
+            const chatHistory = document.getElementById('chat-history');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'flex justify-end';
+            userMsg.innerHTML = `<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] shadow-sm">${query}</div>`;
+            chatHistory.appendChild(userMsg);
+            input.value = '';
+
+            const botMsg = document.createElement('div');
+            botMsg.className = 'glass-card rounded-xl p-6 shadow-sm flex flex-col gap-4';
+            botMsg.innerHTML = '<div class="flex items-center gap-2"><div class="loader"></div> <span class="text-slate-500">Thinking...</span></div>';
+            chatHistory.appendChild(botMsg);
+            botMsg.scrollIntoView({ behavior: 'smooth' });
+
+            try {
+                const res = await fetch('/api/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ index_name: currentIndexName, query: query })
+                });
+                const data = await res.json();
+                
+                if (data.error) throw new Error(data.error);
+
+                botMsg.innerHTML = `
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white shrink-0">
+                            <span class="material-symbols-outlined text-sm">school</span>
+                        </div>
+                        <div class="space-y-4 w-full">
+                            <p class="text-body-md leading-relaxed text-slate-800">${data.answer}</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${data.sources.map((s, i) => `
+                                    <span title="${s.content.replace(/"/g, '&quot;')}" class="px-2 py-1 bg-blue-50 text-[10px] font-label-caps text-blue-600 border border-blue-100 rounded flex items-center gap-1 cursor-help">
+                                        <span class="material-symbols-outlined text-[12px]">description</span>
+                                        ${s.metadata.pdf_name || 'Source'} [${i+1}]
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                botMsg.innerHTML = `<p class="text-error">Error: ${err.message}</p>`;
+            }
+            botMsg.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Handle Revision Notes
+        document.getElementById('generate-notes').addEventListener('click', async () => {
+            const topicInput = document.getElementById('revision-topic');
+            const topic = topicInput.value.trim();
+            const style = document.getElementById('revision-style').value;
+            if (!topic) return;
+            if (!currentIndexName) {
+                alert('Please upload papers first!');
+                return;
+            }
+
+            const output = document.getElementById('revision-output');
+            const originalContent = output.innerHTML;
+            output.innerHTML = '<div class="flex flex-col items-center justify-center h-full gap-4 text-slate-500"><div class="loader"></div> Generating revision notes for ' + topic + '...</div>';
+
+            try {
+                const res = await fetch('/api/generate-revision-notes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        index_name: currentIndexName, 
+                        query: topic, 
+                        task: `Generate comprehensive revision notes in ${style} style for the following topic: ${topic}. Focus on key concepts and definitions from the provided context.` 
+                    })
+                });
+                const data = await res.json();
+                
+                if (data.error) throw new Error(data.error);
+
+                output.innerHTML = `
+                    <div class="prose prose-slate max-w-none">
+                        <h3 class="font-headline-md text-2xl mb-4 border-b pb-2">Topic: ${topic}</h3>
+                        <div class="text-body-md text-slate-700 whitespace-pre-wrap leading-relaxed">${data.answer}</div>
+                    </div>
+                `;
+            } catch (err) {
+                output.innerHTML = `<p class="text-error">Error: ${err.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
